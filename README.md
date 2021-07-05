@@ -1,2 +1,2 @@
 # JS-Matrix
-Matrix math node module
+A basic matrix math node module.
