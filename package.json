@@ -2,7 +2,7 @@
   "name": "@rewforen/js-matrix",
   "version": "1.0.3",
   "description": "Modular matrix class",
-  "main": "src/index.js",
+  "main": "src/matrix.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

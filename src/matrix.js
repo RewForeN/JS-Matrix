@@ -1,7 +1,9 @@
-export class Matrix {
+class Matrix {
 
     constructor() {
         console.log("Matrix created");
     }
 
 }
+
+exports.Matrix = Matrix;
