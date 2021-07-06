@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RewForeN/JS-Matrix/issues"
   },
-  "homepage": "https://github.com/RewForeN/JS-Matrix#readme"
+  "homepage": "https://github.com/RewForeN/JS-Matrix#readme",
+  "devDependencies": {
+    "mocha": "^9.0.2"
+  }
 }
