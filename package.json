@@ -1,7 +1,7 @@
 {
   "name": "@rewforen/js-matrix",
-  "version": "1.0.3",
-  "description": "Modular matrix class",
+  "version": "1.0.4",
+  "description": "A basic matrix math library.",
   "main": "src/matrix.js",
   "scripts": {
     "test": "mocha"
