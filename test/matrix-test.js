@@ -84,19 +84,3 @@ describe('Matrix', function () {
 		});
 	});
 });
-
-// describe('ErrorCheckHelper', function () {
-// 	describe('#assertIndices()', function () {
-// 		it('should throw a TypeError if any of the values are not an Integer', function () {
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': 'a' }) }, TypeError);
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': [1] }) }, TypeError);
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': 1, 'b': 2, 'c': '3' }) }, TypeError);
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': 1.2 }) }, TypeError);
-// 		});
-// 		it('should throw a RangeError if any of the values are 0 or less', function () {
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': 0 }) }, RangeError);
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': -2 }) }, RangeError);
-// 			assert.throws(() => { ErrorCheckHelper.assertIndices({ 'a': 2, 'b': 3, 'c': 0 }) }, RangeError);
-// 		});
-// 	});
-// });
