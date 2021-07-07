@@ -1,5 +1,5 @@
 class Assert {
-	
+
 	static integer(value, caller) {
 		if (!Number.isInteger(value))
 			throw new TypeError(`${caller}: Value must be an integer.`);
@@ -22,3 +22,5 @@ class Assert {
 	}
 
 }
+
+exports.Assert = Assert;
