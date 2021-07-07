@@ -1,7 +1,10 @@
+const { Assert } = require('./assert');
+
 class Matrix {
 
 	constructor(rows, cols, data) {
-		ErrorCheckHelper.assertIndices({ 'rows': rows, 'cols': cols });
+		Assert.integerMin(rows, 1, 'Matrix()');
+		Assert.integerMin(cols, 1, 'Matrix()');
 		if (!Array.isArray(data)) throw new TypeError('[data] should be an array');
 		if (rows * cols !== data.length) throw new RangeError('[rows] and [cols] should match the length of [data]');
 		this.rows = rows;
@@ -24,7 +27,8 @@ class Matrix {
 	}
 
 	static filled(rows, cols, value) {
-		ErrorCheckHelper.assertIndices({ 'rows': rows, 'cols': cols });
+		Assert.integerMin(rows, 1, 'Matrix.filled()');
+		Assert.integerMin(cols, 1, 'Matrix.filled()');
 		let data = (new Array(rows * cols)).fill(value);
 		return new Matrix(rows, cols, data);
 	}
@@ -38,18 +42,16 @@ class Matrix {
 	}
 
 	at(rowIndex, colIndex = undefined) {
+		Assert.index(rowIndex, 'Matrix.at()');
 		let index;
 		if (colIndex !== undefined) {
-			// ERR: Doesn't allow an index of 0
-			ErrorCheckHelper.assertIndices({ 'rowIndex': rowIndex, 'colIndex': colIndex });
-			if (rowIndex > this.rows) throw new RangeError('rowIndex was out of range');
-			if (colIndex > this.cols) throw new RangeError('colIndex was out of range');
+			Assert.index(colIndex, 'Matrix.at()');
+			Assert.integerMax(rowIndex, this.rows, 'Matrix.at()');
+			Assert.integerMax(colIndex, this.cols, 'Matrix.at()');
 			index = this.indexFromRowCol(rowIndex, colIndex);
 		}
 		else {
-			// ERR: Doesn't allow an index of 0
-			ErrorCheckHelper.assertIndices({ 'rowIndex': rowIndex });
-			if (rowIndex > this.len()) throw new RangeError('index was out of range');
+			Assert.integerMax(rowIndex, this.len(), 'Matrix.at()');
 			index = rowIndex;
 		}
 		return this.data[index];
@@ -87,32 +89,23 @@ class Matrix {
 
 	// TODO: Add test
 	rowFromIndex(index) {
-		ErrorCheckHelper.assertIndices({ 'index': index });
+		Assert.index(index, 'Matrix.rowFromIndex()');
 		return Math.floor(index / this.cols);
 	}
 
 	// TODO: Add test
 	colFromIndex(index) {
-		ErrorCheckHelper.assertIndices({ 'index': index });
+		Assert.index(index, 'Matrix.colFromIndex()');
 		return index % (this.cols + 1);
 	}
 
 	// TODO: Add test
 	indexFromRowCol(row, col) {
-		ErrorCheckHelper.assertIndices({ 'rows': rows, 'cols': cols });
+		Assert.index(row, 'Matrix.indexFromRowCol()');
+		Assert.index(col, 'Matrix.indexFromRowCol()');
 		return (this.cols * row) + col;
 	}
 
 }
 
-class ErrorCheckHelper {
-	static assertIndices(options) {
-		for (let [key, value] of Object.entries(options)) {
-			if (!Number.isInteger(value)) throw new TypeError(`[${key}] must be an integer`);
-			if (value <= 0) throw new RangeError(`[${key}] must be greater than 0`);
-		}
-	}
-}
-
 exports.Matrix = Matrix;
-exports.ErrorCheckHelper = ErrorCheckHelper;
