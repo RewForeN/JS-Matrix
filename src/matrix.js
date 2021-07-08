@@ -25,11 +25,11 @@ class Matrix {
 	static ones(rows, cols) {
 		return Matrix.filled(rows, cols, 1);
 	}
-	
+
 	static identity(size) {
 		Assert.integerMin(size, 1, 'Matrix.identity()');
 		let mat = Matrix.zeros(size, size);
-		for (let i = 0 ; i < size; i++) {
+		for (let i = 0; i < size; i++) {
 			mat.set(i, i, 1);
 		}
 		return mat;
@@ -72,9 +72,9 @@ class Matrix {
 		return this.data[index];
 	}
 
-	// TODO: Add test
-	// TODO: Error checks
 	set(row, col, value) {
+		Assert.index(row, 'Matrix.set()');
+		Assert.index(col, 'Matrix.set()');
 		this.data[this.indexFromRowCol(row, col)] = value;
 	}
 

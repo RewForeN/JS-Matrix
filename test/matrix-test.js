@@ -38,7 +38,7 @@ describe('Matrix', function () {
 		});
 	});
 	describe('#identity()', function () {
-		it('should return a Matrix with the expected size', function() {
+		it('should return a Matrix with the expected size', function () {
 			let m1 = Matrix.identity(1);
 			let m2 = Matrix.identity(4);
 			assert.strictEqual(m1.len(), 1);
@@ -48,7 +48,7 @@ describe('Matrix', function () {
 			assert.strictEqual(m2.rows, 4);
 			assert.strictEqual(m2.cols, 4);
 		});
-		it('should return a Matrix with the expected values', function() {
+		it('should return a Matrix with the expected values', function () {
 			assert.deepStrictEqual(Matrix.identity(1).data, [1]);
 			assert.deepStrictEqual(Matrix.identity(3).data, [1, 0, 0, 0, 1, 0, 0, 0, 1]);
 		});
@@ -97,6 +97,18 @@ describe('Matrix', function () {
 			assert.strictEqual(m.at(0, 0), m.data[0]);
 			assert.strictEqual(m.at(0, 0), 1);
 			assert.strictEqual(m.at(1, 2), 6);
+		});
+	});
+	describe('#set()', function () {
+		it('should set the value at the given index', function () {
+			let m = Matrix.zeros(2, 3);
+			assert.deepStrictEqual(m.data, [0, 0, 0, 0, 0, 0]);
+			m.set(0, 0, 2);
+			assert.deepStrictEqual(m.data, [2, 0, 0, 0, 0, 0]);
+			m.set(0, 2, -2);
+			assert.deepStrictEqual(m.data, [2, 0, -2, 0, 0, 0]);
+			m.set(1, 1, 0.95);
+			assert.deepStrictEqual(m.data, [2, 0, -2, 0, 0.95, 0]);
 		});
 	});
 });
