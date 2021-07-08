@@ -37,6 +37,22 @@ describe('Matrix', function () {
 			assert.deepStrictEqual(m.data, [1, 2, 3, 4, 5, 6]);
 		});
 	});
+	describe('#identity()', function () {
+		it('should return a Matrix with the expected size', function() {
+			let m1 = Matrix.identity(1);
+			let m2 = Matrix.identity(4);
+			assert.strictEqual(m1.len(), 1);
+			assert.strictEqual(m1.rows, 1);
+			assert.strictEqual(m1.cols, 1);
+			assert.strictEqual(m2.len(), 16);
+			assert.strictEqual(m2.rows, 4);
+			assert.strictEqual(m2.cols, 4);
+		});
+		it('should return a Matrix with the expected values', function() {
+			assert.deepStrictEqual(Matrix.identity(1).data, [1]);
+			assert.deepStrictEqual(Matrix.identity(3).data, [1, 0, 0, 0, 1, 0, 0, 0, 1]);
+		});
+	});
 	describe('#filled()', function () {
 		it('should create a Matrix with the given dimensions', function () {
 			let m = Matrix.filled(2, 3, 0);

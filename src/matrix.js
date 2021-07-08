@@ -25,6 +25,15 @@ class Matrix {
 	static ones(rows, cols) {
 		return Matrix.filled(rows, cols, 1);
 	}
+	
+	static identity(size) {
+		Assert.integerMin(size, 1, 'Matrix.identity()');
+		let mat = Matrix.zeros(size, size);
+		for (let i = 0 ; i < size; i++) {
+			mat.set(i, i, 1);
+		}
+		return mat;
+	}
 
 	static filled(rows, cols, value) {
 		Assert.integerMin(rows, 1, 'Matrix.filled()');
