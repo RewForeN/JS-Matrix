@@ -111,4 +111,46 @@ describe('Matrix', function () {
 			assert.deepStrictEqual(m.data, [2, 0, -2, 0, 0.95, 0]);
 		});
 	});
+	describe('#add()', function () {
+		describe('When passing a Matrix as a parameter', function () {
+			it('should throw RangeError if given matrix is wrong size', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[1, 2], [3, 4], [5, 6]]);
+				assert.throws(() => { m1.add(m2) }, RangeError);
+			});
+			it('should return a Matrix with the expected values', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[2, 0, -3.1], [1, 6, 1.95]]);
+				assert.deepStrictEqual(m1.add(m2).data, [3, 2, -0.1, 5, 11, 7.95]);
+			});
+		});
+		describe('When passing a value as a parameter', function () {
+			it('should return a Matrix with the expected values', function () {
+				let m = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				assert.deepStrictEqual(m.add(1).data, [2, 3, 4, 5, 6, 7]);
+				assert.deepStrictEqual(m.add(-1.9).data, [-0.9, 0.1, 1.1, 2.1, 3.1, 4.1]);
+			});
+		});
+	});
+	describe('#sub()', function () {
+		describe('When passing a Matrix as a parameter', function () {
+			it('should throw RangeError if given matrix is wrong size', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[1, 2], [3, 4], [5, 6]]);
+				assert.throws(() => { m1.sub(m2) }, RangeError);
+			});
+			it('should return a Matrix with the expected values', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[2, 0, -3.1], [1, 6, 1.95]]);
+				assert.deepStrictEqual(m1.sub(m2).data, [-1, 2, 6.1, 3, -1, 4.05]);
+			});
+		});
+		describe('When passing a value as a parameter', function () {
+			it('should return a Matrix with the expected values', function () {
+				let m = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				assert.deepStrictEqual(m.sub(1).data, [0, 1, 2, 3, 4, 5]);
+				assert.deepStrictEqual(m.sub(-1.9).data, [2.9, 3.9, 4.9, 5.9, 6.9, 7.9]);
+			});
+		});
+	});
 });

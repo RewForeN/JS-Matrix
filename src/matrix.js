@@ -78,22 +78,48 @@ class Matrix {
 		this.data[this.indexFromRowCol(row, col)] = value;
 	}
 
-	// TODO: Add test
-	// TODO: Implement single value addition
 	add(other) {
-		if (!Matrix.isMatrix(other)) throw new TypeError('Parameter must be a Matrix');
-		return this.data.map((val, index) => {
-			return val + other.at(index);
-		});
+		let mat = Matrix.zeros(this.rows, this.cols);
+		if (Matrix.isMatrix(other)) {
+			if (this.rows !== other.rows || this.cols !== other.cols) throw RangeError('Matrices need to be the same size.');
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) + other.at(i, j);
+					mat.set(i, j, parseFloat(val.toPrecision(15)));
+				}
+			}
+		}
+		else {
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) + other;
+					mat.set(i, j, parseFloat(val.toPrecision(15)));
+				}
+			}
+		}
+		return mat;
 	}
 
-	// TODO: Add test
-	// TODO: Implement single value subtraction
 	sub(other) {
-		if (!Matrix.isMatrix(other)) throw new TypeError('Parameter must be a Matrix');
-		return this.data.map((val, index) => {
-			return val - other.at(index);
-		});
+		let mat = Matrix.zeros(this.rows, this.cols);
+		if (Matrix.isMatrix(other)) {
+			if (this.rows !== other.rows || this.cols !== other.cols) throw RangeError('Matrices need to be the same size.');
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) - other.at(i, j);
+					mat.set(i, j, parseFloat(val.toPrecision(15)));
+				}
+			}
+		}
+		else {
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) - other;
+					mat.set(i, j, parseFloat(val.toPrecision(15)));
+				}
+			}
+		}
+		return mat;
 	}
 
 	// TODO: Add test
