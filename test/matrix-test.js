@@ -153,4 +153,43 @@ describe('Matrix', function () {
 			});
 		});
 	});
+	describe('#mul()', function () {
+		describe('When passing a Matrix as a parameter', function () {
+			it('should throw RangeError if given matrix is wrong size', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[1, 2], [3, 4], [5, 6]]);
+				let mat = m1.mul(m2);
+				assert.strictEqual(mat.rows, 2);
+				assert.strictEqual(mat.cols, 2);
+			});
+			it('should return a Matrix with the expected size', function() {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+			});
+			it('should return a Matrix with the expected values', function () {
+				let m1 = Matrix.from2DArray([[1, 2, 3], [4, 5, 6]]);
+				let m2 = Matrix.from2DArray([[1, 2], [3, 4], [5, 6]]);
+				let m3 = Matrix.from2DArray([[0.14, -2.11, -0.995], [4.21, 4.01, -5]]);
+				let m4 = Matrix.from2DArray([[1, 2, 3.33], [-0.91, -1, -1], [1.56, 2, 2]]);
+				assert.deepStrictEqual(m1.mul(m2).data, [22, 28, 49, 64]);
+				assert.deepStrictEqual(m3.mul(m4).data, [0.5079, 0.4, 0.5862, -7.2391, -5.59, 0.0093]);
+			});
+		});
+		describe('When passing a value as a parameter', function () {
+			it('should return a Matrix with the expected values', function () {
+				let m = Matrix.from2DArray([[1, 2.4, 3], [-0.4, 5, -6]]);
+				assert.deepStrictEqual(m.mul(2).data, [2, 4.8, 6, -0.8, 10, -12]);
+				assert.deepStrictEqual(m.mul(-1.9).data, [-1.9, -4.56, -5.7, 0.76, -9.5, 11.4]);
+			});
+		});
+	});
+	describe('#mul()', function () {
+		describe('When passing a value as a parameter', function () {
+			it('should return a Matrix with the expected values', function () {
+				let m = Matrix.from2DArray([[1, 2.4, 3], [-0.4, 5, -6]]);
+				assert.deepStrictEqual(m.div(2).data, [0.5, 1.2, 1.5, -0.2, 2.5, -3]);
+				assert.deepStrictEqual(m.div(-4).data, [-0.25, -0.6, -0.75, 0.1, -1.25, 1.5]);
+			});
+		});
+	});
 });

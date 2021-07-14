@@ -85,7 +85,7 @@ class Matrix {
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.cols; j++) {
 					let val = this.at(i, j) + other.at(i, j);
-					mat.set(i, j, parseFloat(val.toPrecision(15)));
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
 				}
 			}
 		}
@@ -93,7 +93,7 @@ class Matrix {
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.cols; j++) {
 					let val = this.at(i, j) + other;
-					mat.set(i, j, parseFloat(val.toPrecision(15)));
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
 				}
 			}
 		}
@@ -107,7 +107,7 @@ class Matrix {
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.cols; j++) {
 					let val = this.at(i, j) - other.at(i, j);
-					mat.set(i, j, parseFloat(val.toPrecision(15)));
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
 				}
 			}
 		}
@@ -115,7 +115,34 @@ class Matrix {
 			for (let i = 0; i < this.rows; i++) {
 				for (let j = 0; j < this.cols; j++) {
 					let val = this.at(i, j) - other;
-					mat.set(i, j, parseFloat(val.toPrecision(15)));
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
+				}
+			}
+		}
+		return mat;
+	}
+
+	mul(other) {
+		let mat;
+		if (Matrix.isMatrix(other)) {
+			if (this.cols !== other.rows) throw new RangeError('The given Matrix\'s rows dont match this Matrix\'s columns.');
+			mat = Matrix.zeros(this.rows, other.cols);
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < other.cols; j++) {
+					let val = 0;
+					for (let k = 0; k < this.cols; k++) {
+						val += this.at(i, k) * other.at(k, j);
+					}
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
+				}
+			}
+		}
+		else  {
+			mat = Matrix.zeros(this.rows, this.cols);
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) * other;
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
 				}
 			}
 		}
@@ -123,30 +150,22 @@ class Matrix {
 	}
 
 	// TODO: Add test
-	// TODO: Implement single value multiplication
-	mul(other) {
-		if (!Matrix.isMatrix(other)) throw new TypeError('Parameter must be a Matrix');
-		if (this.cols !== other.rows) throw new RangeError('The given Matrix\'s rows dont match this Matrix\'s columns.');
-		let newMat = Matrix.zeros(this.rows, other.cols);
-		for (let i = 0; i < this.rows; i++) {
-			for (let j = 0; j < other.cols; j++) {
-				let val = 0;
-				for (let k = 0; k < this.cols; k++) {
-					val += this.at(i, k) * other.at(k, j);
-					// TODO: Single value add not implemented
-					// newMat.add(i, j, this.at(i, k) * other.at(k, j));
+	// TODO: Implement matrix division
+	div(other) {
+		let mat;
+		if (Matrix.isMatrix(other)) {
+			throw new Error('Matrix division is not implemented.');
+		}
+		else  {
+			mat = Matrix.zeros(this.rows, this.cols);
+			for (let i = 0; i < this.rows; i++) {
+				for (let j = 0; j < this.cols; j++) {
+					let val = this.at(i, j) / other;
+					mat.set(i, j, parseFloat(val.toPrecision(13)));
 				}
-				newMat.set(i, j, val);
 			}
 		}
-		return newMat;
-	}
-
-	// TODO: Add test
-	// TODO: Implement matrix division
-	// TODO: Implement single value division
-	div(other) {
-		if (!Matrix.isMatrix(other)) throw new TypeError('Parameter must be a Matrix');
+		return mat;
 	}
 
 	// TODO: Add test
