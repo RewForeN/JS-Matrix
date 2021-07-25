@@ -50,12 +50,6 @@ class Matrix {
 		return this.data.length;
 	}
 
-	// TODO: Add test
-	// TODO: Implement
-	inverse() {
-
-	}
-
 	at(row, col = undefined) {
 		Assert.index(row, 'Matrix.at()');
 		let index;
@@ -149,8 +143,6 @@ class Matrix {
 		return mat;
 	}
 
-	// TODO: Add test
-	// TODO: Implement matrix division
 	div(other) {
 		let mat;
 		if (Matrix.isMatrix(other)) {

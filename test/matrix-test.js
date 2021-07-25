@@ -183,7 +183,7 @@ describe('Matrix', function () {
 			});
 		});
 	});
-	describe('#mul()', function () {
+	describe('#div()', function () {
 		describe('When passing a value as a parameter', function () {
 			it('should return a Matrix with the expected values', function () {
 				let m = Matrix.from2DArray([[1, 2.4, 3], [-0.4, 5, -6]]);
