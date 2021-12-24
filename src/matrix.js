@@ -109,6 +109,16 @@ class Matrix {
 		this.data[this.indexFromRowCol(row, col)] = value;
 	}
 
+	transpose() {
+		let mat = Matrix.zeros(this.cols, this.rows);
+		for (let i = 0; i < this.rows; i++) {
+			for (let j = 0; j < this.cols; j++) {
+				mat.set(j, i, this.at(i, j));
+			}
+		}
+		return mat;
+	}
+
 	add(other) {
 		let mat = Matrix.zeros(this.rows, this.cols);
 		if (Matrix.isMatrix(other)) {
