@@ -57,6 +57,32 @@ class Matrix {
 		return value !== null && value instanceof Matrix;
 	}
 
+	static mul(a, b) {
+		if (!Matrix.isMatrix(a) || !Matrix.isMatrix(b)) throw new TypeError('Both arguments should be matrices');
+		if (a.rows !== b.rows || a.cols !== b.cols) throw RangeError('Matrices need to be the same size.');
+		let mat = Matrix.zeros(a.rows, a.cols);
+		for (let i = 0; i < a.rows; i++) {
+			for (let j = 0; j < a.cols; j++) {
+				let val = a.at(i, j) * b.at(i, j);
+				mat.set(i, j, parseFloat(val.toPrecision(13)));
+			}
+		}
+		return mat;
+	}
+
+	static div(a, b) {
+		if (!Matrix.isMatrix(a) || !Matrix.isMatrix(b)) throw new TypeError('Both arguments should be matrices');
+		if (a.rows !== b.rows || a.cols !== b.cols) throw RangeError('Matrices need to be the same size.');
+		let mat = Matrix.zeros(a.rows, a.cols);
+		for (let i = 0; i < a.rows; i++) {
+			for (let j = 0; j < a.cols; j++) {
+				let val = a.at(i, j) / b.at(i, j);
+				mat.set(i, j, parseFloat(val.toPrecision(13)));
+			}
+		}
+		return mat;
+	}
+
 	len() {
 		return this.data.length;
 	}
