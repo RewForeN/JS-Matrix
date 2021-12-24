@@ -1,14 +1,18 @@
 
 const { Matrix } = require('../src/matrix');
 
-let mat = Matrix.random(2, 3);
+let mat = Matrix.random(2, 2);
 
-console.log(mat.data);
-console.log(mat.rows);
-console.log(mat.cols);
+mat.forEach((val, i, j) => {
+    console.log(`${val} at ${i}, ${j}`);
+});
 
-let mat2 = mat.transpose();
+console.log("\n\n");
 
-console.log(mat2.data);
-console.log(mat2.rows);
-console.log(mat2.cols);
+let m2 = mat.map((val) => {
+    return val * 2;
+});
+
+m2.forEach((val, i, j) => {
+    console.log(`${val} at ${i}, ${j}`);
+});
