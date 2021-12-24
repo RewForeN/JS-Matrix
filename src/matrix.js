@@ -223,6 +223,24 @@ class Matrix {
 		return (this.cols * row) + col;
 	}
 
+	forEach(callback) {
+		for (let i = 0; i < this.rows; i++) {
+			for (let j = 0; j < this.cols; j++) {
+				callback(this.at(i, j), i, j);
+			}
+		}
+	}
+
+	map(callback) {
+		let mat = Matrix.zeros(this.rows, this.cols);
+		for (let i = 0; i < this.rows; i++) {
+			for (let j = 0; j < this.cols; j++) {
+				mat.set(i, j, callback(this.at(i, j), i, j));
+			}
+		}
+		return mat;
+	}
+
 }
 
 exports.Matrix = Matrix;
