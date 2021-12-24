@@ -42,6 +42,17 @@ class Matrix {
 		return new Matrix(rows, cols, data);
 	}
 
+	static random(rows, cols, min=0, max=1) {
+		let mat = Matrix.zeros(rows, cols);
+		for (let i = 0; i < rows; i++) {
+			for (let j = 0; j < cols; j++) {
+				let val = Math.random() * (max - min) + min;
+				mat.set(i, j, parseFloat(val.toPrecision(13)));
+			}
+		}
+		return mat;
+	}
+
 	static isMatrix(value) {
 		return value !== null && value instanceof Matrix;
 	}
@@ -160,19 +171,16 @@ class Matrix {
 		return mat;
 	}
 
-	// TODO: Add test
 	rowFromIndex(index) {
 		Assert.index(index, 'Matrix.rowFromIndex()');
 		return Math.floor(index / this.cols);
 	}
 
-	// TODO: Add test
 	colFromIndex(index) {
 		Assert.index(index, 'Matrix.colFromIndex()');
 		return index % (this.cols + 1);
 	}
 
-	// TODO: Add test
 	indexFromRowCol(row, col) {
 		Assert.index(row, 'Matrix.indexFromRowCol()');
 		Assert.index(col, 'Matrix.indexFromRowCol()');
